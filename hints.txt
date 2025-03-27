@@ -1,0 +1,12 @@
+{
+    "apple": "It is mentioned in a proverb",
+    "mango": "Referred to as the king of fruits",
+    "cherry": "Linked to a band",
+    "banna": "Yellow color, USA imports in tonnes",
+    "pineapple": "Thorny fruit, high export from Kerala",
+    "tomato": "A red shiny fruit",
+    "onion": "Layered vegetable",
+    "clove": "Used as a spice",
+    "ginger": "A root used for medicinal purposes",
+    "coriander": "A green vegetable"
+}
