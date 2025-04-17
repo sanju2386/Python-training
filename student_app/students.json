@@ -1,0 +1,26 @@
+[
+    {
+        "student_id": "b20aefba-1aa7-49f8-8f07-465eafe64cdb",
+        "name": "Bincy",
+        "age": 13,
+        "grade": "A++"
+    },
+    {
+        "student_id": "447cc0e4-5cb3-467c-85ef-cc52af25b011",
+        "name": "Sam",
+        "age": 13,
+        "grade": "A"
+    },
+    {
+        "student_id": "ebd2634e-b9e0-4b14-ab46-edd7611f727a",
+        "name": "Sam",
+        "age": 12,
+        "grade": "A++"
+    },
+    {
+        "student_id": "6838271f-6ddc-4894-a9dc-282c26754d49",
+        "name": "Sam",
+        "age": 12,
+        "grade": "b"
+    }
+]
