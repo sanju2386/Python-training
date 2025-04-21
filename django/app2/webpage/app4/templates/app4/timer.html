@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head><title>Timer</title></head>
+<body>
+<h2>Simple Timer</h2>
+<p id="timer">0 seconds</p>
+
+<script>
+    let seconds = 0;
+    const timerEl = document.getElementById('timer');
+    setInterval(() => {
+        seconds++;
+        timerEl.textContent = `${seconds} seconds`;
+    }, 1000);
+</script>
+</body>
+</html>

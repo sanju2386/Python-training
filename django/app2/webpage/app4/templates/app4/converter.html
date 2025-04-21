@@ -1,0 +1,12 @@
+<h2>Currency Converter (INR ⇄ USD)</h2>
+<form method="post">
+    {% csrf_token %}
+    <input type="number" name="amount" step="any" required><br>
+    <label><input type="radio" name="conversion" value="usd_to_inr" checked> USD to INR</label><br>
+    <label><input type="radio" name="conversion" value="inr_to_usd"> INR to USD</label><br><br>
+    <button type="submit">Convert</button>
+</form>
+
+{% if result %}
+    <h3>Result: {{ result }}</h3>
+{% endif %}
