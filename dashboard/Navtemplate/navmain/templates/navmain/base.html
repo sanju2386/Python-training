@@ -1,0 +1,88 @@
+<!-- main/templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}My WebApp{% endblock %}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="flex flex-col min-h-screen">
+ 
+    <!-- Header -->
+    <header class="bg-sky-500/50 text-white p-4 flex items-center justify-between">
+        <img src="https://www.freepnglogos.com/uploads/company-logo-png/company-logo-transparent-png-19.png" alt="Logo" class="h-12">
+        <h1 class="text-xl font-bold">Applied Concepts</h1>
+    </header>
+ 
+    <!-- Navigation -->
+    <nav class="bg-gray-100 shadow p-4">
+        <ul class="flex space-x-4">
+            <li><a href="{% url 'dashboard' %}" class="text-blue-600 hover:underline">Dashboard</a></li>
+            <li><a href="{% url 'customers' %}" class="text-blue-600 hover:underline">Customers</a></li>
+            <li><a href="{% url 'incidents' %}" class="text-blue-600 hover:underline">Incidents</a></li>
+            <li><a href="{% url 'about' %}" class="text-blue-600 hover:underline">About</a></li>
+        </ul>
+    </nav>
+ 
+    <!-- Main content -->
+    <main class="flex-grow p-6">
+        {% block content %}
+       
+        {% endblock %}
+    </main>
+ 
+    <!-- Footer -->
+    <footer class="bg-gray-200 p-4 text-center text-sm text-gray-600">
+        &copy; 2025 Applied Concepts. All rights reserved.
+    </footer>
+ 
+</body>
+</html>
+ 
+BASE
+ 
+ 
+from django.shortcuts import render, redirect
+from .forms import IncidentForm
+from .models import Incident
+from django.db.models import Count
+ 
+# Create your views here.
+ 
+def dashboard(request):
+    data = Incident.objects.values('incident_type').annotate(count=Count('id')) # => SQL GROUPBY OPERATION WITH COUNT
+    labels = [ d['incident_type'].capitalize() for d in data]
+    counts = [d['count'] for d in data]
+    context = {
+        'labels': labels,
+        'counts': counts
+    }
+    return render(request, 'navmain/dashboard.html', context=context)
+ 
+ 
+def incidents(request):
+    if request.method == 'POST':
+        form = IncidentForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('incidents')
+    else:
+        form = IncidentForm()
+    context = {
+        'form': form
+    }
+    return render(request, 'navmain/incidents.html', context=context)
+ 
+ 
+def customers(request):
+    incidents = Incident.objects.all().order_by('timestamp')
+    context = {
+        "incidents": incidents
+    }
+    return render(request, 'navmain/customers.html', context=context)
+ 
+ 
+def about(request):
+    return render(request, 'navmain/about.html')  
+ 
+ 
